@@ -19,8 +19,8 @@ let getPlayerChoice = function() {
 }
 
 let playGame = function(playerChoice, computerChoice) {
-    console.log(`Player has selected: ${playerChoice}`);
-    console.log(`Computer has selected: ${computerChoice}`);
+    alert(`Player has selected: ${playerChoice}`);
+    alert(`Computer has selected: ${computerChoice}`);
 
     let playerScore = choices.indexOf(playerChoice);
     let computerScore = choices.indexOf(computerChoice);
@@ -29,7 +29,7 @@ let playGame = function(playerChoice, computerChoice) {
     {
         return "Player Wins!";
     }
-    else if (playerScore === (computerScore - 1) % 3)
+    else if (computerScore  === (playerScore + 1) % 3)
     {
         return "Computer Wins!";
     }
@@ -46,7 +46,7 @@ let game = function() {
     for (let i = 0; i < 5; i++)
     {
         let result = playGame(getPlayerChoice(), getComputerChoice());
-        console.log(result);
+        alert(result);
 
         if (result === "Player Wins!")
         {
@@ -61,17 +61,21 @@ let game = function() {
             i -= 1;
         }
 
+        alert(`Player has won ${playerCount}, Computer has won ${computerCount}`);
+
         if (playerCount >= 3)
         {
-            console.log("Player has won the match!");
+            alert("Player has won the match!");
             return;
         }
         else if (computerCount >= 3)
         {
-            console.log("Computer has won the match!");
+            alert("Computer has won the match!");
             return;
         }
     }
 }
+
+alert("Welcome to Rock, Paper, Scissors! Try to beat the computer in a best of 5 match!");
 
 game();
