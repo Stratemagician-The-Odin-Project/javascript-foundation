@@ -1,9 +1,12 @@
+// Valid choices for the game
 const choices = Array("rock", "paper", "scissors");
 
+// Return random choice for computer
 let getComputerChoice = function() {
     return choices[Math.floor(Math.random() * choices.length)];
 }
 
+// Return player choice from prompt box, reject invalid choices and ask again
 let getPlayerChoice = function() {
     let choice = prompt("Enter your move (rock, paper or scissors):");
 
@@ -18,6 +21,7 @@ let getPlayerChoice = function() {
     }
 }
 
+// Given player and computer input, return the result of the game using cheeky modulo technique
 let playGame = function(playerChoice, computerChoice) {
     alert(`Player has selected: ${playerChoice}`);
     alert(`Computer has selected: ${computerChoice}`);
@@ -39,6 +43,7 @@ let playGame = function(playerChoice, computerChoice) {
     }
 }
 
+// Run the best of 5 match and handle ultimate victory by player or computer
 let game = function() {
     let playerCount = 0;
     let computerCount = 0;
@@ -76,6 +81,8 @@ let game = function() {
     }
 }
 
+// Welcome text
 alert("Welcome to Rock, Paper, Scissors! Try to beat the computer in a best of 5 match!");
 
+// Run match
 game();
