@@ -1,3 +1,5 @@
+
+
 // Valid choices for the game
 const choices = Array("rock", "paper", "scissors");
 
@@ -43,46 +45,57 @@ let playGame = function(playerChoice, computerChoice) {
     }
 }
 
+let playerCount = 0;
+let computerCount = 0;
+
 // Run the best of 5 match and handle ultimate victory by player or computer
-let game = function() {
-    let playerCount = 0;
-    let computerCount = 0;
+let game = function(playerChoice) {
+ 
 
-    for (let i = 0; i < 5; i++)
+    let result = playGame(playerChoice, getComputerChoice());
+    alert(result);
+
+    if (result === "Player Wins!")
     {
-        let result = playGame(getPlayerChoice(), getComputerChoice());
-        alert(result);
-
-        if (result === "Player Wins!")
-        {
-            playerCount += 1;
-        }
-        else if (result === "Computer Wins!")
-        {
-            computerCount += 1;
-        }
-        else
-        {
-            i -= 1;
-        }
-
-        alert(`Player has won ${playerCount}, Computer has won ${computerCount}`);
-
-        if (playerCount >= 3)
-        {
-            alert("Player has won the match!");
-            return;
-        }
-        else if (computerCount >= 3)
-        {
-            alert("Computer has won the match!");
-            return;
-        }
+        playerCount += 1;
     }
+    else if (result === "Computer Wins!")
+    {
+        computerCount += 1;
+    }
+    else
+    {
+        i -= 1;
+    }
+
+    alert(`Player has won ${playerCount}, Computer has won ${computerCount}`);
+
+    if (playerCount >= 3)
+    {
+        alert("Player has won the match!");
+        // end game
+    }
+    else if (computerCount >= 3)
+    {
+        alert("Computer has won the match!");
+        // end game
+    }
+
+    return
 }
 
 // Welcome text
-alert("Welcome to Rock, Paper, Scissors! Try to beat the computer in a best of 5 match!");
+//alert("Welcome to Rock, Paper, Scissors! Try to beat the computer in a best of 5 match!");
 
 // Run match
-game();
+//game();
+
+/// NEW STUFF
+
+buttonClick = function(e) {
+    console.log(e.target.classList.value);
+    game(this.classList.value);
+}
+
+const buttons = document.querySelectorAll("button");
+buttons.forEach(button => button.addEventListener('click', buttonClick));
