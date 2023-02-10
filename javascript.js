@@ -25,8 +25,6 @@ let getPlayerChoice = function() {
 
 // Given player and computer input, return the result of the game using cheeky modulo technique
 let playGame = function(playerChoice, computerChoice) {
-    alert(`Player has selected: ${playerChoice}`);
-    alert(`Computer has selected: ${computerChoice}`);
 
     let playerScore = choices.indexOf(playerChoice);
     let computerScore = choices.indexOf(computerChoice);
@@ -45,44 +43,60 @@ let playGame = function(playerChoice, computerChoice) {
     }
 }
 
+const results = document.querySelector(".results");
+results.setAttribute('style', 'white-space: pre;');
+
 let playerCount = 0;
 let computerCount = 0;
+let resultText = "";
+let gameResult = "";
+
+init = function() {
+    playerCount = 0;
+    computerCount = 0;
+    resultText = "";
+    gameResult = "";
+    results.textContent = "";
+}
+
+
 
 // Run the best of 5 match and handle ultimate victory by player or computer
 let game = function(playerChoice) {
  
-
-    let result = playGame(playerChoice, getComputerChoice());
-    alert(result);
-
+    let computerChoice = getComputerChoice();
+    let result = playGame(playerChoice, computerChoice);
+    
     if (result === "Player Wins!")
     {
         playerCount += 1;
+        resultText = "Player Wins!";
     }
     else if (result === "Computer Wins!")
     {
         computerCount += 1;
+        resultText = "Computer Wins!";
     }
     else
     {
-        i -= 1;
+        resultText = "Draw!";   
     }
-
-    alert(`Player has won ${playerCount}, Computer has won ${computerCount}`);
 
     if (playerCount >= 3)
     {
-        alert("Player has won the match!");
-        // end game
+        gameResult = "Player has won the match! Press any button to start again";
     }
     else if (computerCount >= 3)
     {
-        alert("Computer has won the match!");
-        // end game
+        gameResult = "Computer has won the match! Press any button to start again";
     }
+
+    results.textContent = `Player has chosen ${playerChoice}.\nComputer has chosen ${computerChoice}.\n${resultText}\nPlayer has won ${playerCount}, Computer has won ${computerCount}\n${gameResult}`;
 
     return
 }
+
+init();
 
 // Welcome text
 //alert("Welcome to Rock, Paper, Scissors! Try to beat the computer in a best of 5 match!");
@@ -93,7 +107,10 @@ let game = function(playerChoice) {
 /// NEW STUFF
 
 buttonClick = function(e) {
-    console.log(e.target.classList.value);
+    if (gameResult !== "")
+    {
+        init();
+    }
     game(this.classList.value);
 }
 
